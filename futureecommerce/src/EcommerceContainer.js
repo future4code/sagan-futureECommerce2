@@ -6,9 +6,12 @@ import styled from 'styled-components'
 
 
 const Container = styled.div`
+  margin: 1vh 1vw ;
   display: flex;
   justify-content:space-between;
-  margin: 1vh 1vw ;
+  /* display: grid;
+  grid-template-rows: 100px;
+  grid-template-columns: 1fr 4fr; */
 `
 
 const Button = styled.button`
@@ -21,19 +24,39 @@ const Button = styled.button`
 
 `
 
-function EcommerceContainer() {
-  return (
-    <Container>
-      <Filtro />
-      <Home />
-      <Carrinho />
+class EcommerceContainer extends React.Component {
+  
+  constructor(props) {
+    super(props)
+    this.state = {
+      estadoDoCarrinho: false
+    }
+  }
+  
+  apareceDesapareceCarrinho = () => {
+    const novoEstadoCarrinho = this.state.estadoDoCarrinho
+    this.setState({ 
+      estadoDoCarrinho: !novoEstadoCarrinho
+    })
+  }
 
-      <Button>
-        <h1 class="material-icons">shopping_cart</h1> 
-      </Button>
+  render() {
 
-    </Container>
-  );
+
+    return (
+      <Container>
+        <Filtro />
+        <Home />
+
+        {this.state.estadoDoCarrinho && <Carrinho />}
+  
+        <Button onClick={this.apareceDesapareceCarrinho}>
+          <h1 class="material-icons">shopping_cart</h1> 
+        </Button>
+  
+      </Container>
+    );
+  }
 }
 
 export default EcommerceContainer;

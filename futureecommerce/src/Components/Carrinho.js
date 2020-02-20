@@ -1,14 +1,39 @@
 import React from 'react'
+import styled from 'styled-components'
 
 
-function Carrinho(){
+
+const CarrinhoContainer = styled.div`
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 1vh 1vw;
+    width: 20vw;
+`
+
+const Titulo = styled.h2`
+    margin-top: 0;
+`
+
+
+class Carrinho extends React.Component{ 
+    constructor(props){
+        super(props)
+        this.state = {
+            valorTotal: 0,
+
+        }
+    } 
+
+    render(){
     return(
-        <div>
-            <p> Eu sou um Carrinho</p>
-        </div>
+        <CarrinhoContainer>
+            <Titulo>Carrinho:</Titulo>
+            <p>Total: {this.state.valorTotal}</p>
+        </CarrinhoContainer>
     )
 
 }
 
-
+}
 export default Carrinho;

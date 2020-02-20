@@ -9,9 +9,7 @@ const Container = styled.div`
   margin: 1vh 1vw ;
   display: flex;
   justify-content:space-between;
-  /* display: grid;
-  grid-template-rows: 100px;
-  grid-template-columns: 1fr 4fr; */
+  
 `
 
 const Button = styled.button`

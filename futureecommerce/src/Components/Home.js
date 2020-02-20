@@ -3,13 +3,19 @@ import styled from 'styled-components'
 
 const HomeContainer = styled.div`
     background-color: grey;
-    width: 60vw;
+    min-width: 60vw;
+    margin: 0 1vw;
     
 `
 const DivSuperior = styled.div`
     display:flex;
     justify-content: space-between;
+    margin: 1vh 1vw;
 `
+const SeletorDePreco = styled.select`
+    margin: 2vh 1vw;
+`
+
 const GridDeProdutos = styled.div`
     /* display: grid;
     grid-template-columns: 1fr, 1fr, 1fr, 1fr;
@@ -21,26 +27,36 @@ const GridDeProdutos = styled.div`
 `
 const ImagemProduto = styled.img`
     width: 100%;
-    height: 100px;
+    height: 40%;
 `
+ const DivNomeValor = styled.div`
+    height: 25%;
+
+ `
+
+const Paragrafo = styled.p`
+    margin-top: 0;
+`
+
 const BotaoAdicionarCarrinho = styled.button`
     background-color: black;
     color: white;
     bottom: 0;
-    min-height: 60px;
-
+    height: 20%;
 `
 const Produto = styled.div`
     margin: 1vh 1vw;
     padding: 1vh 1vw;
     border: 1px orange dotted;
     width: 10vw;
-    height: 30vh;
+    height: 45vh;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     
 `
+
+
 
 
 
@@ -99,37 +115,71 @@ class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            ordem: true,
+            filtro: "crescente",
+
         }
     }
+ 
+    mudarFiltro = (event) => {
+        const novoFiltro = event.target.value
+        this.setState({
+            filtro: novoFiltro
+        })
+
+        
+    } 
 
 
     render() {
+
+        let listaCrescente = listaDeProdutos.sort(function(a, b){
+            return a.value < b.value ? -1 : a.value > b.value ? 1 : 0
+        }).map((cadaProduto) => {
+            return (
+                <Produto>
+                    <ImagemProduto src={cadaProduto.imageUrl} />
+                    <DivNomeValor>
+                        <Paragrafo>{cadaProduto.name}</Paragrafo>
+                        <Paragrafo>R${parseFloat(cadaProduto.value).toFixed(2)}</Paragrafo>
+                    </DivNomeValor>
+                    <BotaoAdicionarCarrinho>
+                        Adicionar ao Carrinho
+                    </BotaoAdicionarCarrinho>
+                </Produto>
+            )
+        })
+
+        let listaDecrescente = listaDeProdutos.sort(function(a, b){
+            return a.value < b.value ? 1 : a.value > b.value ? -1 : 0
+        }).map((cadaProduto) => {
+            return (
+                <Produto>
+                    <ImagemProduto src={cadaProduto.imageUrl} />
+                    <DivNomeValor>
+                        <Paragrafo>{cadaProduto.name}</Paragrafo>
+                        <Paragrafo>R${parseFloat(cadaProduto.value).toFixed(2)}</Paragrafo>
+                    </DivNomeValor>
+                    <BotaoAdicionarCarrinho>
+                        Adicionar ao Carrinho
+                    </BotaoAdicionarCarrinho>
+                </Produto>
+            )
+        })
+
+
         return (
 
             <HomeContainer>
                 <DivSuperior>
                     <p>Quantidade de produtos: {listaDeProdutos.length}</p>
-                    <select>
-                        <option>Preço Crescente</option>
-                        <option>Preço Decrescente</option>
-                    </select>
+                    <SeletorDePreco onChange={this.mudarFiltro} value={this.state.filtro}>
+                        <option value="crescente">Preço Crescente</option>
+                        <option value="decrescente">Preço Decrescente</option>
+                    </SeletorDePreco>
                 </DivSuperior>
                 <GridDeProdutos>
-                    {listaDeProdutos.map((cadaProduto) => {
-                        return (
-                            <Produto>
-                                <ImagemProduto src={cadaProduto.imageUrl} />
-                                <div>
-                                    <p>{cadaProduto.name}</p>
-                                    <p>R${parseFloat(cadaProduto.value).toFixed(2)}</p>
-                                </div>
-                                <BotaoAdicionarCarrinho>
-                                    Adicionar ao Carrinho
-                                </BotaoAdicionarCarrinho>
-                            </Produto>
-                        )
-                    })}
+                  {this.state.filtro === "crescente" && listaCrescente}
+                  {this.state.filtro === "decrescente" && listaDecrescente}
                 </GridDeProdutos>
 
             </HomeContainer>

@@ -27,15 +27,38 @@ class EcommerceContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      estadoDoCarrinho: false
+      estadoDoCarrinho: false,
+      filtroMinimo: '',
+      filtroMaximo: '',
+      filtroNome: ''
     }
   }
   
+
+
   apareceDesapareceCarrinho = () => {
     const novoEstadoCarrinho = this.state.estadoDoCarrinho
     this.setState({ 
       estadoDoCarrinho: !novoEstadoCarrinho
     })
+  }
+  atualizaFiltro = (tipoFiltro, valorFiltro) => {
+    if (tipoFiltro === 'valorMin') { 
+      this.setState({
+        filtroMinimo: valorFiltro
+      })
+    }
+    if (tipoFiltro === 'valorMax') { 
+      this.setState({
+        filtroMaximo: valorFiltro
+      })
+    }
+    if (tipoFiltro === 'busca') { 
+      this.setState({
+        filtroNome: valorFiltro
+      })
+    }
+
   }
 
   render() {
@@ -43,8 +66,12 @@ class EcommerceContainer extends React.Component {
 
     return (
       <Container>
-        <Filtro />
-        <Home />
+        <Filtro aoMudarFiltro={this.atualizaFiltro} />
+        <Home 
+        filtroMinimo={this.state.filtroMinimo}
+        filtroMaximo={this.state.filtroMaximo}
+        filtroNome={this.state.filtroNome}
+        />
 
         {this.state.estadoDoCarrinho && <Carrinho />}
   

@@ -1,11 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
 
+const HomeContainer = styled.div`
+    background-color: grey;
+    width: 70%;
+`
 
 function Home(){
     return(
-        <div>
+        <HomeContainer>
             <p> Eu sou uma Home</p>
-        </div>
+        </HomeContainer>
     )
 
 }

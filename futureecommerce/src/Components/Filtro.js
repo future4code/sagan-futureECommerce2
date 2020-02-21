@@ -52,8 +52,6 @@ class Filtro extends React.Component {
 
   render() {
 
-    const filtroValores = ''
-
     return (
       <FiltroContainer>
 

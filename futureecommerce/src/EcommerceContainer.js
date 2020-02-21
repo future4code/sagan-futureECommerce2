@@ -1,15 +1,15 @@
 import React from 'react';
+import styled from 'styled-components'
+
 import Filtro from './Components/Filtro';
 import Home from './Components/Home';
 import Carrinho from './Components/Carrinho';
-import styled from 'styled-components'
 
 
 const Container = styled.div`
   margin: 1vh 1vw ;
   display: flex;
   justify-content:space-between;
-  
 `
 
 const Button = styled.button`
@@ -20,66 +20,80 @@ const Button = styled.button`
   border-radius: 50%;
   padding: 0 1vw;
   outline: 0;
-
 `
 
 class EcommerceContainer extends React.Component {
-  
+
   constructor(props) {
     super(props)
     this.state = {
       estadoDoCarrinho: false,
       filtroMinimo: '',
       filtroMaximo: '',
-      filtroNome: ''
+      filtroNome: '',
+      carrinho: []
     }
   }
-  
-
 
   apareceDesapareceCarrinho = () => {
     const novoEstadoCarrinho = this.state.estadoDoCarrinho
-    this.setState({ 
+    this.setState({
       estadoDoCarrinho: !novoEstadoCarrinho
     })
   }
+
   atualizaFiltro = (tipoFiltro, valorFiltro) => {
-    if (tipoFiltro === 'valorMin') { 
+    if (tipoFiltro === 'valorMin') {
       this.setState({
         filtroMinimo: valorFiltro
       })
     }
-    if (tipoFiltro === 'valorMax') { 
+    if (tipoFiltro === 'valorMax') {
       this.setState({
         filtroMaximo: valorFiltro
       })
     }
-    if (tipoFiltro === 'busca') { 
+    if (tipoFiltro === 'busca') {
       this.setState({
         filtroNome: valorFiltro
       })
     }
+  }
 
+  atualizaCarrinho = (novoProduto) => {
+    // console.log(novoProduto)
+
+    // checar se o produto está no carrinho... findIndex
+      /// se não tá no carrinho
+
+
+    // adicionar novo produto ao array carrinho - copia, adiciona e setState
+    const copiaCarrinho = [...this.state.carrinho, novoProduto]
+    
+
+    this.setState({carrinho: copiaCarrinho})
+    // console.log(copiaCarrinho)
   }
 
   render() {
 
-
     return (
       <Container>
         <Filtro aoMudarFiltro={this.atualizaFiltro} />
-        <Home 
-        filtroMinimo={this.state.filtroMinimo}
-        filtroMaximo={this.state.filtroMaximo}
-        filtroNome={this.state.filtroNome}
+
+        <Home
+          filtroMinimo={this.state.filtroMinimo}
+          filtroMaximo={this.state.filtroMaximo}
+          filtroNome={this.state.filtroNome}
+          aoClicarAdiciona={this.atualizaCarrinho}
         />
 
-        {this.state.estadoDoCarrinho && <Carrinho />}
-  
+        {this.state.estadoDoCarrinho && <Carrinho itensCarrinho={this.state.carrinho} />}
+
         <Button onClick={this.apareceDesapareceCarrinho}>
-          <h1 class="material-icons">shopping_cart</h1> 
+          <h1 className="material-icons">shopping_cart</h1>
         </Button>
-  
+
       </Container>
     );
   }

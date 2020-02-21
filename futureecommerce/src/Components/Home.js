@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const HomeContainer = styled.div`
-    background-color: silver;
     min-width: 60vw;
     margin: 0 1vw;
 `
@@ -21,19 +20,18 @@ const GridDeProdutos = styled.div`
 `
 const ImagemProduto = styled.img`
     width: 100%;
-    height: 50%;
 `
 const DivNomeValor = styled.div`
-    height: 20%;
+    height: 8vw;
  `
 const Paragrafo = styled.p`
-    margin-top: 0;
+    margin: 0;
 `
 const BotaoAdicionarCarrinho = styled.button`
     background-color: black;
     color: white;
     bottom: 0;
-    height: 15%;
+    height: 8vw;
     outline:0;
 `
 const Produto = styled.div`
@@ -41,7 +39,7 @@ const Produto = styled.div`
     padding: 1vh 1vw;
     border: 2px orange dotted;
     width: 10vw;
-    height: 35vh;
+    height: 30vw;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -51,49 +49,49 @@ const listaDeProdutos = [{
   id: 1,
   name: "Cama do Astronauta",
   value: 500.0,
-  imageUrl: "https://user-images.githubusercontent.com/56808066/74940111-bfd58a80-53cf-11ea-94ab-976a8b1e19b0.jpg",
+  imageUrl: "https://user-images.githubusercontent.com/45580434/75055787-68f5b100-54b4-11ea-849f-bcac9d4df84d.jpg",
 },
 {
   id: 2,
   name: "Lego Miniaturas",
   value: 150.49,
-  imageUrl: "https://user-images.githubusercontent.com/56808066/74940763-af71df80-53d0-11ea-95a3-ba3d163af6d8.jpg",
+  imageUrl: "https://user-images.githubusercontent.com/45580434/75055804-6e52fb80-54b4-11ea-9bef-5451ec0477d1.png",
 },
 {
   id: 3,
   name: "Nave inflável",
   value: 299.99,
-  imageUrl: "https://user-images.githubusercontent.com/56808066/74940768-b0a30c80-53d0-11ea-9ad7-78d106ee2448.jpg",
+  imageUrl: "https://user-images.githubusercontent.com/45580434/75055807-6eeb9200-54b4-11ea-8469-5aafdc7ab5ec.jpg",
 },
 {
   id: 4,
   name: "Cabana espacial",
   value: 280.0,
-  imageUrl: "https://user-images.githubusercontent.com/56808066/74940769-b13ba300-53d0-11ea-9bea-e1df5fb6b9ee.jpg",
+  imageUrl: "https://user-images.githubusercontent.com/45580434/75055779-67c48400-54b4-11ea-9fc7-eaa86ac1d408.jpg",
 },
 {
   id: 5,
   name: "Foguete lego",
   value: 120.25,
-  imageUrl: "https://user-images.githubusercontent.com/56808066/74940770-b13ba300-53d0-11ea-9189-3356d4756ca5.jpg",
+  imageUrl: "https://user-images.githubusercontent.com/45580434/75055801-6dba6500-54b4-11ea-949d-5994697bca97.jpg",
 },
 {
   id: 6,
   name: "Lego City",
   value: 499.99,
-  imageUrl: "https://user-images.githubusercontent.com/56808066/74940772-b26cd000-53d0-11ea-80ef-3bbcbfdcef93.png",
+  imageUrl: "https://user-images.githubusercontent.com/45580434/75055791-698e4780-54b4-11ea-879d-9e2db9ec711d.png",
 },
 {
   id: 7,
   name: "Foguete Espacial",
   value: 179.0,
-  imageUrl: "https://user-images.githubusercontent.com/56808066/74940783-b7318400-53d0-11ea-8cd3-2918f64b05d3.png",
+  imageUrl: "https://user-images.githubusercontent.com/45580434/75055800-6bf0a180-54b4-11ea-9729-45b133741b27.png",
 },
 {
   id: 8,
   name: "Miniaturas StarWars",
   value: 999.99,
-  imageUrl: "https://user-images.githubusercontent.com/56808066/74940788-b993de00-53d0-11ea-8cc6-757b8d95b716.png",
+  imageUrl: "https://user-images.githubusercontent.com/45580434/75055808-6f842880-54b4-11ea-8496-4aebb9df797d.jpg",
 },
 ]
 

@@ -63,16 +63,38 @@ class EcommerceContainer extends React.Component {
   atualizaCarrinho = (novoProduto) => {
     // console.log(novoProduto)
 
-    // checar se o produto está no carrinho... findIndex
-      /// se não tá no carrinho
+    const copiaCarrinho = [...this.state.carrinho]
 
+    // checar se o produto está no carrinho... findIndex... retorna -1 pra false
+    const produtosNoCarrinho = this.state.carrinho.findIndex((cadaProduto) => cadaProduto.novoProduto.id === novoProduto.id)
 
-    // adicionar novo produto ao array carrinho - copia, adiciona e setState
-    const copiaCarrinho = [...this.state.carrinho, novoProduto]
-    
-
-    this.setState({carrinho: copiaCarrinho})
+    /// se já tá no carrinho
+    if (produtosNoCarrinho > -1) {
+      /// adiciono 1 na quantidade (um novo parâmetro)
+      copiaCarrinho[produtosNoCarrinho].quantidade += 1
+    } else {
+      copiaCarrinho.push({
+        novoProduto: novoProduto,
+        quantidade: 1
+      })
+    }
     // console.log(copiaCarrinho)
+
+    this.setState({ carrinho: copiaCarrinho })
+
+  }
+
+  removeProdutoDoCarrinho = (novoProduto) => {
+
+    // igual a adicionar
+    const copiaCarrinho = [...this.state.carrinho]
+    const produtoPraRemoverNoCarrinho = this.state.carrinho.findIndex((cadaProduto) => cadaProduto.novoProduto.id === novoProduto.id)
+
+    // só muda aqui, quando retira
+    copiaCarrinho.splice(produtoPraRemoverNoCarrinho, 1)
+
+    this.setState({ carrinho: copiaCarrinho })
+
   }
 
   render() {
@@ -88,7 +110,10 @@ class EcommerceContainer extends React.Component {
           aoClicarAdiciona={this.atualizaCarrinho}
         />
 
-        {this.state.estadoDoCarrinho && <Carrinho itensCarrinho={this.state.carrinho} />}
+        {this.state.estadoDoCarrinho && <Carrinho
+          itensCarrinho={this.state.carrinho}
+          removeProdutoDoCarrinho={this.removeProdutoDoCarrinho}
+        />}
 
         <Button onClick={this.apareceDesapareceCarrinho}>
           <h1 className="material-icons">shopping_cart</h1>

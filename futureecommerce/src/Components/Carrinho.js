@@ -13,6 +13,16 @@ const Titulo = styled.h2`
     margin-top: 0;
 `
 
+const DivProdutoNoCarrinho = styled.div`
+    padding-bottom: 1vh;
+    display: flex;
+    justify-content: space-between;
+`
+
+const SpanExcluir = styled.span`
+    color: red;
+`
+
 class Carrinho extends React.Component {
     constructor(props) {
         super(props)
@@ -21,11 +31,20 @@ class Carrinho extends React.Component {
     trazProdutosPraLista = () => {
         // aqui eu vou dar um map no carrinho e retornar uma div q contem quantidade - nome (talvez um botão de deletar... q posso fazer mais pra frente)
         // lembrar de estilizar essa div com uma border-botton dashed, só pra dividir os elementos
-        return this.props.itensCarrinho.map((cadaProdutoNoCarrinho) => {
+        return this.props.itensCarrinho.map((cadaProdutoNoCarrinho, index) => {
             return (
-                <div>
-                    {cadaProdutoNoCarrinho.value}
-                </div>
+                <DivProdutoNoCarrinho key={index}>
+
+                    <div>
+                        {cadaProdutoNoCarrinho.quantidade}<span>x </span>
+                        {cadaProdutoNoCarrinho.novoProduto.name} 
+                    </div>
+
+                    <div>
+                    <SpanExcluir onClick={() => this.props.removeProdutoDoCarrinho(cadaProdutoNoCarrinho.novoProduto)}>X</SpanExcluir>
+                    </div>         
+
+                </DivProdutoNoCarrinho>
             )
         })
     }
@@ -35,10 +54,9 @@ class Carrinho extends React.Component {
         // pego aquele array criado no botão... vou somar os valores dos produtos adicionados multiplicados pelas quantidades
         // talvez usar reduce
 
-        // return this.props.itensCarrinho.reduce( (prevVal, elem, index, array) => {
-        //     return prevVal + elem.nome.value * elem.quantidade
-        // }, 0)
-        return 0
+        return this.props.itensCarrinho.reduce( (prevVal, cadaProdutoNoCarrinho, index, array) => {
+            return prevVal + cadaProdutoNoCarrinho.novoProduto.value * cadaProdutoNoCarrinho.quantidade
+        }, 0)
     }
 
     render() {

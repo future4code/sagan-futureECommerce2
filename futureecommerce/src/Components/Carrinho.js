@@ -63,8 +63,8 @@ class Carrinho extends React.Component {
                 }, 0)
             }else{
                 return this.props.itensCarrinho.reduce( (prevVal, cadaProdutoNoCarrinho, index, array) => {
-                    return prevVal + cadaProdutoNoCarrinho.novoProduto.value * cadaProdutoNoCarrinho.quantidade
-                }, -50)
+                    return prevVal + (cadaProdutoNoCarrinho.novoProduto.value * cadaProdutoNoCarrinho.quantidade) * 0.75
+                }, 0)
             }
     }
 
@@ -80,7 +80,7 @@ class Carrinho extends React.Component {
     render() {
         let listaDeProdutosNoCarrinho = this.trazProdutosPraLista()
         let valorTotal = this.mudaValorTotal()
-        let mudaTextoBotao = this.state.botaoDesconto === false ? "Quero R$50 Desconto!": "Não quero Desconto!"
+        let mudaTextoBotao = this.state.botaoDesconto === false ? "Quero 25% de desconto!": "Não quero Desconto!"
         return (
             <CarrinhoContainer>
                 <Titulo>Carrinho:</Titulo>

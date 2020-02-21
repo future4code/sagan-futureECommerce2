@@ -60,6 +60,12 @@ class EcommerceContainer extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const inputArmazenandosString = localStorage.getItem("valoresDosInputs");
+    const novoEstado = JSON.parse(inputArmazenandosString);
+    this.setState(novoEstado);
+  }
+
   atualizaCarrinho = (novoProduto) => {
     // console.log(novoProduto)
 
@@ -82,6 +88,12 @@ class EcommerceContainer extends React.Component {
 
     this.setState({ carrinho: copiaCarrinho })
 
+  }
+
+
+  componentDidUpdate() {
+    const estadoComoString = JSON.stringify(this.state);
+    localStorage.setItem("valoresDosInputs", estadoComoString);
   }
 
   removeProdutoDoCarrinho = (novoProduto) => {

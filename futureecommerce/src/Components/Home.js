@@ -15,19 +15,16 @@ const SeletorDePreco = styled.select`
     margin: 2vh 1vw;
 `
 const GridDeProdutos = styled.div`
-    /* display: grid;
-    grid-template-columns: 1fr, 1fr, 1fr, 1fr;
-    grid-template-rows: 1fr, 1fr, 1fr, 1fr; */
     display:flex;
     flex-wrap:wrap;
     justify-content: center;
 `
 const ImagemProduto = styled.img`
     width: 100%;
-    height: 40%;
+    height: 50%;
 `
 const DivNomeValor = styled.div`
-    height: 25%;
+    height: 20%;
  `
 const Paragrafo = styled.p`
     margin-top: 0;
@@ -36,7 +33,7 @@ const BotaoAdicionarCarrinho = styled.button`
     background-color: black;
     color: white;
     bottom: 0;
-    height: 20%;
+    height: 15%;
     outline:0;
 `
 const Produto = styled.div`
@@ -51,49 +48,49 @@ const Produto = styled.div`
 `
 
 const listaDeProdutos = [{
-  id: Date.now(),
+  id: 1,
   name: "Cama do Astronauta",
   value: 500.0,
   imageUrl: "https://user-images.githubusercontent.com/56808066/74940111-bfd58a80-53cf-11ea-94ab-976a8b1e19b0.jpg",
 },
 {
-  id: Date.now(),
+  id: 2,
   name: "Lego Miniaturas",
   value: 150.49,
   imageUrl: "https://user-images.githubusercontent.com/56808066/74940763-af71df80-53d0-11ea-95a3-ba3d163af6d8.jpg",
 },
 {
-  id: Date.now(),
+  id: 3,
   name: "Nave inflável",
   value: 299.99,
   imageUrl: "https://user-images.githubusercontent.com/56808066/74940768-b0a30c80-53d0-11ea-9ad7-78d106ee2448.jpg",
 },
 {
-  id: Date.now(),
+  id: 4,
   name: "Cabana espacial",
   value: 280.0,
   imageUrl: "https://user-images.githubusercontent.com/56808066/74940769-b13ba300-53d0-11ea-9bea-e1df5fb6b9ee.jpg",
 },
 {
-  id: Date.now(),
+  id: 5,
   name: "Foguete lego",
   value: 120.25,
   imageUrl: "https://user-images.githubusercontent.com/56808066/74940770-b13ba300-53d0-11ea-9189-3356d4756ca5.jpg",
 },
 {
-  id: Date.now(),
+  id: 6,
   name: "Lego City",
   value: 499.99,
   imageUrl: "https://user-images.githubusercontent.com/56808066/74940772-b26cd000-53d0-11ea-80ef-3bbcbfdcef93.png",
 },
 {
-  id: Date.now(),
+  id: 7,
   name: "Foguete Espacial",
   value: 179.0,
   imageUrl: "https://user-images.githubusercontent.com/56808066/74940783-b7318400-53d0-11ea-8cd3-2918f64b05d3.png",
 },
 {
-  id: Date.now(),
+  id: 8,
   name: "Miniaturas StarWars",
   value: 999.99,
   imageUrl: "https://user-images.githubusercontent.com/56808066/74940788-b993de00-53d0-11ea-8cc6-757b8d95b716.png",
@@ -106,6 +103,7 @@ class Home extends React.Component {
     super(props)
     this.state = {
       ordenacao: "crescente",
+      listaDeProdutosNoCarrinho: []
     }
   }
 
@@ -116,7 +114,10 @@ class Home extends React.Component {
     })
   }
 
-
+  adicionaProduto = (idProdutoAdicionado) => {
+    const novoProduto = listaDeProdutos.find((elemento) => elemento.id === idProdutoAdicionado)
+    this.props.aoClicarAdiciona(novoProduto)
+  }
 
   render() {
 
@@ -158,15 +159,15 @@ class Home extends React.Component {
       else if (this.props.filtroNome) {
         return elemento.name.toLowerCase().includes((this.props.filtroNome).toLowerCase())
       }
-    }).map((cadaProduto) => { //não mexer! substituir pela lista filtrada
+    }).map((cadaProduto, index) => {
       return (
-        <Produto>
+        <Produto key={index}>
           <ImagemProduto src={cadaProduto.imageUrl} />
           <DivNomeValor>
             <Paragrafo>{cadaProduto.name}</Paragrafo>
             <Paragrafo>R${parseFloat(cadaProduto.value).toFixed(2)}</Paragrafo>
           </DivNomeValor>
-          <BotaoAdicionarCarrinho>
+          <BotaoAdicionarCarrinho onClick={() => this.adicionaProduto(cadaProduto.id)}>
             Adicionar ao Carrinho
           </BotaoAdicionarCarrinho>
         </Produto>
@@ -174,15 +175,15 @@ class Home extends React.Component {
     })
 
 
-    const listaNaoFiltrada = listaOrdenada.map((cadaProduto) => { //não mexer! substituir pela lista filtrada
+    const listaNaoFiltrada = listaOrdenada.map((cadaProduto, index) => {
       return (
-        <Produto>
+        <Produto key={index}>
           <ImagemProduto src={cadaProduto.imageUrl} />
           <DivNomeValor>
             <Paragrafo>{cadaProduto.name}</Paragrafo>
             <Paragrafo>R${parseFloat(cadaProduto.value).toFixed(2)}</Paragrafo>
           </DivNomeValor>
-          <BotaoAdicionarCarrinho>
+          <BotaoAdicionarCarrinho onClick={() => this.adicionaProduto(cadaProduto.id)}>
             Adicionar ao Carrinho
           </BotaoAdicionarCarrinho>
         </Produto>
@@ -195,8 +196,6 @@ class Home extends React.Component {
     } else {
       listaDeItens = listaNaoFiltrada
     }
-
-
 
     return (
 

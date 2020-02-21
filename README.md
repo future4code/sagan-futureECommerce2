@@ -58,6 +58,6 @@ Criar um E-Commerce com os requisitos abaixo.
 
 
 #### Desafios
-- [] Salvar e Recuperar conteúdo do carrinho usando o `LocalStorage`
+- [x] Salvar e Recuperar conteúdo do carrinho usando o `LocalStorage`
 - [x] Qual funcionalidade está faltando? Decida em grupo o que vocês concordam que poderia ser uma boa adição à loja virtual, pode ser qualquer funcionalidade, desde que vocês consigam implementá-la. Ao decidir uma funcionalidade, vocês devem confirmar com os instrutores antes de prosseguir através de um atendimento.
-<br>*Nós implementamos um botão de desconto*
+<br>_Nós implementamos um **botão de desconto**_

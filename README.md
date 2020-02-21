@@ -7,9 +7,9 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 ## Projeto: futureECommerce2
 
-[Site do projeto](http://xxx.surge.sh/)
+[Site do projeto](http://sagan-ecommerce2.surge.sh/)
 
-![xxx](https:/xxx.gif)
+![ecommerce](https://user-images.githubusercontent.com/45580434/75068382-d6faa200-54cd-11ea-99de-26f5c8dc7c61.gif)
 
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/future4code/sagan-futureECommerce2">
@@ -58,5 +58,6 @@ Criar um E-Commerce com os requisitos abaixo.
 
 
 #### Desafios
-1. [] Salvar e Recuperar conteúdo do carrinho usando o `LocalStorage`
-2. [] Qual funcionalidade está faltando? Decida em grupo o que vocês concordam que poderia ser uma boa adição à loja virtual, pode ser qualquer funcionalidade, desde que vocês consigam implementá-la. Ao decidir uma funcionalidade, vocês devem confirmar com os instrutores antes de prosseguir através de um atendimento.
+- [] Salvar e Recuperar conteúdo do carrinho usando o `LocalStorage`
+- [x] Qual funcionalidade está faltando? Decida em grupo o que vocês concordam que poderia ser uma boa adição à loja virtual, pode ser qualquer funcionalidade, desde que vocês consigam implementá-la. Ao decidir uma funcionalidade, vocês devem confirmar com os instrutores antes de prosseguir através de um atendimento.
+<br>*Nós implementamos um botão de desconto*

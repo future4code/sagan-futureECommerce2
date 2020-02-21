@@ -44,7 +44,7 @@ const Produto = styled.div`
     padding: 1vh 1vw;
     border: 2px orange dotted;
     width: 10vw;
-    height: 45vh;
+    height: 35vh;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -131,30 +131,34 @@ class Home extends React.Component {
       })
     }
 
-    
-    /*  fazer 3 filtros
-    this.props.filtroMinimo
-    this.props.filtroMaximo
-    this.props.filtroNome
-    */
-
-    // let listaFiltrada = listaOrdenada.filter((elemento) => {
-    //   if (condition) {
-        
-    //   } else {
-    //     return this.props.filtroMinimo >= elemento.value
-        
-    //   }
-    // }).filter((elemento) => {
-
-      
-    //   return this.props.filtroMaximo <= elemento.value
-    // }).filter((elemento) => {
-    //   return this.props.filtroNome == elemento.name
-    // })
-
-
-    const listarenderizada = listaOrdenada.map((cadaProduto) => { //não mexer! substituir pela lista filtrada
+    const listaFiltrada = listaOrdenada.filter((elemento) => {
+      if (this.props.filtroMinimo && this.props.filtroMaximo && this.props.filtroNome) {
+        return (elemento.value >= this.props.filtroMinimo 
+          && elemento.value <= this.props.filtroMaximo 
+          && elemento.name.toLowerCase().includes((this.props.filtroNome).toLowerCase()))
+      } 
+      else if (this.props.filtroMinimo && this.props.filtroMaximo){
+        return (elemento.value >= this.props.filtroMinimo 
+          && elemento.value <= this.props.filtroMaximo)
+      }
+      else if (this.props.filtroMinimo && this.props.filtroNome){
+        return (elemento.value >= this.props.filtroMinimo 
+          && elemento.name.toLowerCase().includes((this.props.filtroNome).toLowerCase()))
+      }
+      else if (this.props.filtroMaximo && this.props.filtroNome){
+        return (elemento.value <= this.props.filtroMaximo 
+          && elemento.name.toLowerCase().includes((this.props.filtroNome).toLowerCase()))
+      }
+      else if (this.props.filtroMinimo) {
+        return elemento.value >= this.props.filtroMinimo
+      }
+      else if (this.props.filtroMaximo) {
+        return elemento.value <= this.props.filtroMaximo
+      }
+      else if (this.props.filtroNome) {
+        return elemento.name.toLowerCase().includes((this.props.filtroNome).toLowerCase())
+      }
+    }).map((cadaProduto) => { //não mexer! substituir pela lista filtrada
       return (
         <Produto>
           <ImagemProduto src={cadaProduto.imageUrl} />
@@ -169,18 +173,43 @@ class Home extends React.Component {
       )
     })
 
+
+    const listaNaoFiltrada = listaOrdenada.map((cadaProduto) => { //não mexer! substituir pela lista filtrada
+      return (
+        <Produto>
+          <ImagemProduto src={cadaProduto.imageUrl} />
+          <DivNomeValor>
+            <Paragrafo>{cadaProduto.name}</Paragrafo>
+            <Paragrafo>R${parseFloat(cadaProduto.value).toFixed(2)}</Paragrafo>
+          </DivNomeValor>
+          <BotaoAdicionarCarrinho>
+            Adicionar ao Carrinho
+          </BotaoAdicionarCarrinho>
+        </Produto>
+      )
+    })
+
+    let listaDeItens
+    if (this.props.filtroMinimo || this.props.filtroMaximo || this.props.filtroNome) {
+      listaDeItens = listaFiltrada
+    } else {
+      listaDeItens = listaNaoFiltrada
+    }
+
+
+
     return (
 
       <HomeContainer>
         <DivSuperior>
-          <p>Quantidade de produtos: {listaDeProdutos.length}</p>
+          <p>Quantidade de produtos: {listaDeItens.length}</p>
           <SeletorDePreco onChange={this.mudarOrdenacao} value={this.state.ordenacao}>
             <option value="crescente">Preço Crescente</option>
             <option value="decrescente">Preço Decrescente</option>
           </SeletorDePreco>
         </DivSuperior>
         <GridDeProdutos>
-          {listarenderizada}
+          {listaDeItens}
         </GridDeProdutos>
       </HomeContainer>
     );

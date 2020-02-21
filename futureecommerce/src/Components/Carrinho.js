@@ -29,7 +29,7 @@ class Carrinho extends React.Component{
     return(
         <CarrinhoContainer>
             <Titulo>Carrinho:</Titulo>
-            <p>Total: {this.state.valorTotal}</p>
+            <p>Total: <strong>R$ {this.state.valorTotal.toFixed(2)}</strong></p>
         </CarrinhoContainer>
     )
 

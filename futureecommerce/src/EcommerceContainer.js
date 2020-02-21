@@ -19,6 +19,7 @@ const Button = styled.button`
   margin: 2vh 2vw;
   border-radius: 50%;
   padding: 0 1vw;
+  outline: 0;
 
 `
 

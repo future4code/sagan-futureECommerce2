@@ -13,36 +13,55 @@ const DivSuperior = styled.div`
 const SeletorDePreco = styled.select`
     margin: 2vh 1vw;
 `
+
+const DivInferior = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 1vh 1vw;
+`
+
 const GridDeProdutos = styled.div`
     display:flex;
     flex-wrap:wrap;
     justify-content: center;
 `
-const ImagemProduto = styled.img`
-    width: 100%;
-`
-const DivNomeValor = styled.div`
-    height: 8vw;
- `
-const Paragrafo = styled.p`
-    margin: 0;
-`
-const BotaoAdicionarCarrinho = styled.button`
-    background-color: black;
-    color: white;
-    bottom: 0;
-    height: 8vw;
-    outline:0;
-`
+
 const Produto = styled.div`
     margin: 1vh 1vw;
     padding: 1vh 1vw;
     border: 2px orange dotted;
     width: 10vw;
-    height: 30vw;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
+`
+
+const ImagemProduto = styled.img`
+    width: 100%;
+`
+
+const DivNomeValor = styled.div`
+    padding: 1vh 1vw;
+ `
+
+const Paragrafo = styled.p``
+
+const BotaoAdicionarCarrinho = styled.button`
+    background-color: black;
+    color: white;
+    bottom: 0;
+    padding: 1vh 1vw;
+    outline:0;
+`
+
+const ProdutoRenderizado = styled.div`
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px black solid;
+  margin: 1vh 1vw;
+  padding: 1vh 1vw;
 `
 
 const listaDeProdutos = [{
@@ -101,7 +120,8 @@ class Home extends React.Component {
     super(props)
     this.state = {
       ordenacao: "crescente",
-      listaDeProdutosNoCarrinho: []
+      listaDeProdutosNoCarrinho: [],
+      produtoSelecionado: null
     }
   }
 
@@ -115,6 +135,28 @@ class Home extends React.Component {
   adicionaProduto = (idProdutoAdicionado) => {
     const novoProduto = listaDeProdutos.find((elemento) => elemento.id === idProdutoAdicionado)
     this.props.aoClicarAdiciona(novoProduto)
+  }
+
+  onProdutoSelecionado = (cadaProduto) => {
+    this.setState({
+      produtoSelecionado: cadaProduto
+    })
+  }
+
+  renderizaProdutoSelecionado(produtoSelecionado) {
+    if (produtoSelecionado != null) {
+      return (
+        <ProdutoRenderizado>
+          <ImagemProduto src={produtoSelecionado.imageUrl} alt={produtoSelecionado.name} />
+          <Paragrafo>{produtoSelecionado.name}</Paragrafo>
+          <Paragrafo>R${parseFloat(produtoSelecionado.value).toFixed(2)}</Paragrafo>
+        </ProdutoRenderizado>
+      )
+    } else { // retorno uma div vazia e nada será renderizado na tela
+      return (
+        <div></div>
+      )
+    }
   }
 
   render() {
@@ -132,20 +174,20 @@ class Home extends React.Component {
 
     const listaFiltrada = listaOrdenada.filter((elemento) => {
       if (this.props.filtroMinimo && this.props.filtroMaximo && this.props.filtroNome) {
-        return (elemento.value >= this.props.filtroMinimo 
-          && elemento.value <= this.props.filtroMaximo 
+        return (elemento.value >= this.props.filtroMinimo
+          && elemento.value <= this.props.filtroMaximo
           && elemento.name.toLowerCase().includes((this.props.filtroNome).toLowerCase()))
-      } 
-      else if (this.props.filtroMinimo && this.props.filtroMaximo){
-        return (elemento.value >= this.props.filtroMinimo 
+      }
+      else if (this.props.filtroMinimo && this.props.filtroMaximo) {
+        return (elemento.value >= this.props.filtroMinimo
           && elemento.value <= this.props.filtroMaximo)
       }
-      else if (this.props.filtroMinimo && this.props.filtroNome){
-        return (elemento.value >= this.props.filtroMinimo 
+      else if (this.props.filtroMinimo && this.props.filtroNome) {
+        return (elemento.value >= this.props.filtroMinimo
           && elemento.name.toLowerCase().includes((this.props.filtroNome).toLowerCase()))
       }
-      else if (this.props.filtroMaximo && this.props.filtroNome){
-        return (elemento.value <= this.props.filtroMaximo 
+      else if (this.props.filtroMaximo && this.props.filtroNome) {
+        return (elemento.value <= this.props.filtroMaximo
           && elemento.name.toLowerCase().includes((this.props.filtroNome).toLowerCase()))
       }
       else if (this.props.filtroMinimo) {
@@ -160,7 +202,7 @@ class Home extends React.Component {
     }).map((cadaProduto, index) => {
       return (
         <Produto key={index}>
-          <ImagemProduto src={cadaProduto.imageUrl} />
+          <ImagemProduto src={cadaProduto.imageUrl} alt={cadaProduto.name} onClick={() => this.onProdutoSelecionado(cadaProduto)} />
           <DivNomeValor>
             <Paragrafo>{cadaProduto.name}</Paragrafo>
             <Paragrafo>R${parseFloat(cadaProduto.value).toFixed(2)}</Paragrafo>
@@ -176,7 +218,7 @@ class Home extends React.Component {
     const listaNaoFiltrada = listaOrdenada.map((cadaProduto, index) => {
       return (
         <Produto key={index}>
-          <ImagemProduto src={cadaProduto.imageUrl} />
+          <ImagemProduto src={cadaProduto.imageUrl} alt={cadaProduto.name} onClick={() => this.onProdutoSelecionado(cadaProduto)} />
           <DivNomeValor>
             <Paragrafo>{cadaProduto.name}</Paragrafo>
             <Paragrafo>R${parseFloat(cadaProduto.value).toFixed(2)}</Paragrafo>
@@ -205,9 +247,15 @@ class Home extends React.Component {
             <option value="decrescente">Preço Decrescente</option>
           </SeletorDePreco>
         </DivSuperior>
-        <GridDeProdutos>
-          {listaDeItens}
-        </GridDeProdutos>
+        <DivInferior>
+          <GridDeProdutos>
+            {listaDeItens}
+          </GridDeProdutos>
+          <div>
+            {this.renderizaProdutoSelecionado(this.state.produtoSelecionado)}
+          </div>
+
+        </DivInferior>
       </HomeContainer>
     );
   }
@@ -215,4 +263,3 @@ class Home extends React.Component {
 
 
 export default Home;
-

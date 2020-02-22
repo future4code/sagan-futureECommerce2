@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { LISTADEPRODUTOS } from '../shared/listaDeProdutos'
 
 const HomeContainer = styled.div`
     min-width: 60vw;
@@ -18,6 +19,12 @@ const DivInferior = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 1vh 1vw;
+
+  @media screen and (max-device-width: 1200px) {
+    /* celulares */
+    display: flex;
+    flex-wrap:wrap;
+  }
 `
 
 const GridDeProdutos = styled.div`
@@ -46,6 +53,10 @@ const DivNomeValor = styled.div`
 
 const Paragrafo = styled.p``
 
+const TituloProdutoPequeno = styled.h4``
+
+const TituloProdutoRenderizado = styled.h2``
+
 const BotaoAdicionarCarrinho = styled.button`
     background-color: black;
     color: white;
@@ -55,65 +66,33 @@ const BotaoAdicionarCarrinho = styled.button`
 `
 
 const ProdutoRenderizado = styled.div`
-  width: 30vw;
+  width: 25vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border: 2px black solid;
   margin: 1vh 1vw;
   padding: 1vh 1vw;
+
+  @media screen and (max-device-width: 1200px) {
+    width: 90vw;
+  }
 `
 
-const listaDeProdutos = [{
-  id: 1,
-  name: "Cama do Astronauta",
-  value: 500.0,
-  imageUrl: "https://user-images.githubusercontent.com/45580434/75055787-68f5b100-54b4-11ea-849f-bcac9d4df84d.jpg",
-},
-{
-  id: 2,
-  name: "Lego Miniaturas",
-  value: 150.49,
-  imageUrl: "https://user-images.githubusercontent.com/45580434/75055804-6e52fb80-54b4-11ea-9bef-5451ec0477d1.png",
-},
-{
-  id: 3,
-  name: "Nave inflável",
-  value: 299.99,
-  imageUrl: "https://user-images.githubusercontent.com/45580434/75055807-6eeb9200-54b4-11ea-8469-5aafdc7ab5ec.jpg",
-},
-{
-  id: 4,
-  name: "Cabana espacial",
-  value: 280.0,
-  imageUrl: "https://user-images.githubusercontent.com/45580434/75055779-67c48400-54b4-11ea-9fc7-eaa86ac1d408.jpg",
-},
-{
-  id: 5,
-  name: "Foguete lego",
-  value: 120.25,
-  imageUrl: "https://user-images.githubusercontent.com/45580434/75055801-6dba6500-54b4-11ea-949d-5994697bca97.jpg",
-},
-{
-  id: 6,
-  name: "Lego City",
-  value: 499.99,
-  imageUrl: "https://user-images.githubusercontent.com/45580434/75055791-698e4780-54b4-11ea-879d-9e2db9ec711d.png",
-},
-{
-  id: 7,
-  name: "Foguete Espacial",
-  value: 179.0,
-  imageUrl: "https://user-images.githubusercontent.com/45580434/75055800-6bf0a180-54b4-11ea-9729-45b133741b27.png",
-},
-{
-  id: 8,
-  name: "Miniaturas StarWars",
-  value: 999.99,
-  imageUrl: "https://user-images.githubusercontent.com/45580434/75055808-6f842880-54b4-11ea-8496-4aebb9df797d.jpg",
-},
-]
+const DivDescricao = styled.div`
+  margin: 2vh 0;
+  padding: 0 1vw;
+  background-color: #f0f0f0;
+  border-radius: 25px;
+`
 
+const ParagrafoDescricao = styled.p`
+  text-align: justify;
+  padding-bottom: 1vh;
+`
+
+
+const listaDeProdutos = LISTADEPRODUTOS
 
 class Home extends React.Component {
   constructor(props) {
@@ -148,8 +127,17 @@ class Home extends React.Component {
       return (
         <ProdutoRenderizado>
           <ImagemProduto src={produtoSelecionado.imageUrl} alt={produtoSelecionado.name} />
-          <Paragrafo>{produtoSelecionado.name}</Paragrafo>
-          <Paragrafo>R${parseFloat(produtoSelecionado.value).toFixed(2)}</Paragrafo>
+          <div>
+            <TituloProdutoRenderizado>{produtoSelecionado.name}</TituloProdutoRenderizado>
+            <Paragrafo>R${parseFloat(produtoSelecionado.value).toFixed(2)}</Paragrafo>
+          </div>
+          <BotaoAdicionarCarrinho onClick={() => this.adicionaProduto(produtoSelecionado.id)}>
+            Adicionar ao Carrinho
+          </BotaoAdicionarCarrinho>
+          <DivDescricao>
+            <h4>Descrição do produto</h4>
+            <ParagrafoDescricao>{produtoSelecionado.descricao}</ParagrafoDescricao>
+          </DivDescricao>
         </ProdutoRenderizado>
       )
     } else { // retorno uma div vazia e nada será renderizado na tela
@@ -199,12 +187,12 @@ class Home extends React.Component {
       else if (this.props.filtroNome) {
         return elemento.name.toLowerCase().includes((this.props.filtroNome).toLowerCase())
       }
-    }).map((cadaProduto, index) => {
+    }).map((cadaProduto) => {
       return (
-        <Produto key={index}>
+        <Produto key={cadaProduto.id}>
           <ImagemProduto src={cadaProduto.imageUrl} alt={cadaProduto.name} onClick={() => this.onProdutoSelecionado(cadaProduto)} />
           <DivNomeValor>
-            <Paragrafo>{cadaProduto.name}</Paragrafo>
+            <TituloProdutoPequeno>{cadaProduto.name}</TituloProdutoPequeno>
             <Paragrafo>R${parseFloat(cadaProduto.value).toFixed(2)}</Paragrafo>
           </DivNomeValor>
           <BotaoAdicionarCarrinho onClick={() => this.adicionaProduto(cadaProduto.id)}>
@@ -215,12 +203,12 @@ class Home extends React.Component {
     })
 
 
-    const listaNaoFiltrada = listaOrdenada.map((cadaProduto, index) => {
+    const listaNaoFiltrada = listaOrdenada.map((cadaProduto) => {
       return (
-        <Produto key={index}>
+        <Produto key={cadaProduto.id}>
           <ImagemProduto src={cadaProduto.imageUrl} alt={cadaProduto.name} onClick={() => this.onProdutoSelecionado(cadaProduto)} />
           <DivNomeValor>
-            <Paragrafo>{cadaProduto.name}</Paragrafo>
+            <TituloProdutoPequeno>{cadaProduto.name}</TituloProdutoPequeno>
             <Paragrafo>R${parseFloat(cadaProduto.value).toFixed(2)}</Paragrafo>
           </DivNomeValor>
           <BotaoAdicionarCarrinho onClick={() => this.adicionaProduto(cadaProduto.id)}>
@@ -248,9 +236,11 @@ class Home extends React.Component {
           </SeletorDePreco>
         </DivSuperior>
         <DivInferior>
+
           <GridDeProdutos>
             {listaDeItens}
           </GridDeProdutos>
+
           <div>
             {this.renderizaProdutoSelecionado(this.state.produtoSelecionado)}
           </div>

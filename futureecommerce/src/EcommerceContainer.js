@@ -10,6 +10,12 @@ const Container = styled.div`
   margin: 1vh 1vw ;
   display: flex;
   justify-content:space-between;
+
+  @media screen and (max-device-width: 1200px) {
+    /* celulares */
+    display: flex;
+    flex-wrap:wrap;
+  }
 `
 
 const Button = styled.button`

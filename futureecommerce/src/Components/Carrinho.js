@@ -7,6 +7,10 @@ const CarrinhoContainer = styled.div`
     flex-direction: column;
     padding: 1vh 1vw;
     width: 20vw;
+
+  @media screen and (max-device-width: 1200px) {
+    width: 100vw;
+  }
 `
 
 const Titulo = styled.h2`

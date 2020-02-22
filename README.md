@@ -12,18 +12,18 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 ![ecommerce](https://user-images.githubusercontent.com/45580434/75068382-d6faa200-54cd-11ea-99de-26f5c8dc7c61.gif)
 
 <p align="center">
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/rosanarezende/sagan-futureECommerce2">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/future4code/sagan-futureECommerce2">
 
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/rosanarezende/sagan-futureECommerce2">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/future4code/sagan-futureECommerce2">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/rosanarezende/sagan-futureECommerce2">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/future4code/sagan-futureECommerce2">
 
-  <a href="https://github.com/rosanarezende/sagan-futureECommerce2/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/rosanarezende/sagan-futureECommerce2">
+  <a href="https://github.com/future4code/sagan-futureECommerce2/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/future4code/sagan-futureECommerce2">
   </a>
 
-  <a href="https://github.com/rosanarezende/sagan-futureECommerce2/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/rosanarezende/sagan-futureECommerce2">
+  <a href="https://github.com/future4code/sagan-futureECommerce2/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/future4code/sagan-futureECommerce2">
   </a>
 </p>
 <br>

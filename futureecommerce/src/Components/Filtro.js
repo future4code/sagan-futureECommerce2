@@ -2,18 +2,41 @@ import React from 'react'
 import styled from 'styled-components'
 
 const FiltroContainer = styled.div`
-    border: 1px solid black;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 1vh 1vw;
+  width: 20vw;
+  margin-top: 1vh;
+
+  @media screen and (max-device-width: 1200px) {
+    width: 100vw;
+  }
+`
+
+const DivInputs = styled.div`
+  @media screen and (max-device-width: 1200px) {
     display: flex;
-    flex-direction: column;
-    padding: 1vh 1vw;
-    width: 20vw;
+    flex-direction: row;
+    justify-content: space-around;
+  }
 `
 
 const TituloFiltro = styled.h2`
-    margin-top: 0;
+  margin-top: 0;
+    
+  @media screen and (max-device-width: 1200px) {
+    margin: 0;
+    padding-bottom: 2vh
+  }
+
 `
 const InputFiltro = styled.input`
-    margin-bottom: 1vh;
+  margin-bottom: 1vh;
+
+  @media screen and (max-device-width: 1200px) {
+    width: 28vw;
+  }
 `
 class Filtro extends React.Component {
   constructor(props) {
@@ -56,12 +79,23 @@ class Filtro extends React.Component {
       <FiltroContainer>
 
         <TituloFiltro>Filtros:</TituloFiltro>
-        <label>Valor Mínimo</label>
-        <InputFiltro type="number" onChange={this.mudarInputValorMinimo} value={this.state.valorMinimo} />
-        <label>Valor Máximo</label>
-        <InputFiltro type="number" onChange={this.mudarInputValorMaximo} value={this.state.valorMaximo} />
-        <label>Buscar Produto</label>
-        <InputFiltro type="text" onChange={this.mudarInputPesquisa} value={this.state.buscaProduto} />
+
+        <DivInputs>
+          <div>
+            <label>Valor Mínimo</label>
+            <InputFiltro type="number" onChange={this.mudarInputValorMinimo} value={this.state.valorMinimo} />
+          </div>
+          <div>
+            <label>Valor Máximo</label>
+            <InputFiltro type="number" onChange={this.mudarInputValorMaximo} value={this.state.valorMaximo} />
+          </div>
+          <div>
+            <label>Buscar Produto</label>
+            <InputFiltro type="text" onChange={this.mudarInputPesquisa} value={this.state.buscaProduto} />
+          </div>
+        </DivInputs>
+
+
       </FiltroContainer>
     )
   }

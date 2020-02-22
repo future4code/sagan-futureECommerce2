@@ -2,11 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 
 const CarrinhoContainer = styled.div`
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    padding: 1vh 1vw;
-    width: 20vw;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  margin: 1vh 1vw;
+  padding: 1vh 1vw;
+  width: 78vw;
+
+  @media screen and (max-device-width: 1200px) {
+    margin: 1vh 0;
+    width: 96vw;
+  }
 `
 
 const Titulo = styled.h2`
@@ -23,6 +29,20 @@ const SpanExcluir = styled.span`
     color: red;
 `
 
+const DivBotaoDesconto = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+const BotaoDesconto = styled.button`
+  width: 15%;
+  margin: 1vh 0;
+
+  @media screen and (max-device-width: 1200px) {
+    width: 30%;
+  }
+`
+
 class Carrinho extends React.Component {
   constructor(props) {
     super(props)
@@ -31,17 +51,6 @@ class Carrinho extends React.Component {
       botaoDesconto: false,
     }
   }
-
-  // componentDidMount() {
-  //   const inputArmazenandosString = localStorage.getItem("valoresNoEstado");
-  //   const novoEstado = JSON.parse(inputArmazenandosString);
-  //   this.setState(novoEstado);
-  // }
-
-  // componentDidUpdate() {
-  //   const estadoComoString = JSON.stringify(this.state);
-  //   localStorage.setItem("valoresNoEstado", estadoComoString);
-  // }
 
   trazProdutosPraLista = () => {
     // aqui eu vou dar um map no carrinho e retornar uma div q contem quantidade - nome (talvez um botão de deletar... q posso fazer mais pra frente)
@@ -56,7 +65,7 @@ class Carrinho extends React.Component {
           </div>
 
           <div>
-            <SpanExcluir onClick={() => this.props.removeProdutoDoCarrinho(cadaProdutoNoCarrinho.novoProduto)}>X</SpanExcluir>
+            <SpanExcluir onClick={() => this.props.removeProdutoDoCarrinho(cadaProdutoNoCarrinho.novoProduto)}><i class="material-icons">close</i></SpanExcluir>
           </div>
 
         </DivProdutoNoCarrinho>
@@ -93,9 +102,15 @@ class Carrinho extends React.Component {
     return (
       <CarrinhoContainer>
         <Titulo>Carrinho:</Titulo>
+
         {listaDeProdutosNoCarrinho}
+
         <p>Total: <strong>R$ {valorTotal.toFixed(2)}</strong></p>
-        <button onClick={this.gerarDesconto}>{mudaTextoBotao}</button>
+        
+        <DivBotaoDesconto>
+          <BotaoDesconto onClick={this.gerarDesconto}>{mudaTextoBotao}</BotaoDesconto>
+        </DivBotaoDesconto>
+
       </CarrinhoContainer>
     )
   }

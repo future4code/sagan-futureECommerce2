@@ -2,14 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 
 const CarrinhoContainer = styled.div`
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    padding: 1vh 1vw;
-    width: 20vw;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  margin: 1vh 1vw;
+  padding: 1vh 1vw;
+  width: 78vw;
 
   @media screen and (max-device-width: 1200px) {
-    width: 100vw;
+    margin: 1vh 0;
+    width: 96vw;
   }
 `
 
@@ -36,17 +38,6 @@ class Carrinho extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   const inputArmazenandosString = localStorage.getItem("valoresNoEstado");
-  //   const novoEstado = JSON.parse(inputArmazenandosString);
-  //   this.setState(novoEstado);
-  // }
-
-  // componentDidUpdate() {
-  //   const estadoComoString = JSON.stringify(this.state);
-  //   localStorage.setItem("valoresNoEstado", estadoComoString);
-  // }
-
   trazProdutosPraLista = () => {
     // aqui eu vou dar um map no carrinho e retornar uma div q contem quantidade - nome (talvez um botão de deletar... q posso fazer mais pra frente)
     // lembrar de estilizar essa div com uma border-botton dashed, só pra dividir os elementos
@@ -60,7 +51,7 @@ class Carrinho extends React.Component {
           </div>
 
           <div>
-            <SpanExcluir onClick={() => this.props.removeProdutoDoCarrinho(cadaProdutoNoCarrinho.novoProduto)}>X</SpanExcluir>
+            <SpanExcluir onClick={() => this.props.removeProdutoDoCarrinho(cadaProdutoNoCarrinho.novoProduto)}><i class="material-icons">close</i></SpanExcluir>
           </div>
 
         </DivProdutoNoCarrinho>

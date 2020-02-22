@@ -9,10 +9,10 @@ const HomeContainer = styled.div`
 const DivSuperior = styled.div`
     display:flex;
     justify-content: space-between;
-    margin: 1vh 1vw;
+    margin: 1vh 5vw;
 `
 const SeletorDePreco = styled.select`
-    margin: 2vh 1vw;
+    margin: 2vh 0;
 `
 
 const DivInferior = styled.div`
@@ -83,6 +83,12 @@ const ProdutoRenderizado = styled.div`
   }
 `
 
+const DivBotaoExcluiRenderizacao = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  padding-bottom: 1vh;
+`
+
 const DivDescricao = styled.div`
   margin: 2vh 0;
   padding: 0 1vw;
@@ -136,7 +142,10 @@ class Home extends React.Component {
     if (produtoSelecionado != null) {
       return (
         <ProdutoRenderizado>
-          <ImagemProduto src={produtoSelecionado.imageUrl} alt={produtoSelecionado.name} onClick={() => this.onProdutoRenderizadoSelecionado(produtoSelecionado)}/>
+          <DivBotaoExcluiRenderizacao>
+            <i class="material-icons" onClick={() => this.onProdutoRenderizadoSelecionado(produtoSelecionado)}>close</i>
+          </DivBotaoExcluiRenderizacao>
+          <ImagemProduto src={produtoSelecionado.imageUrl} alt={produtoSelecionado.name}/>
           <div>
             <TituloProdutoRenderizado>{produtoSelecionado.name}</TituloProdutoRenderizado>
             <Paragrafo>R${parseFloat(produtoSelecionado.value).toFixed(2)}</Paragrafo>
@@ -216,7 +225,7 @@ class Home extends React.Component {
     const listaNaoFiltrada = listaOrdenada.map((cadaProduto) => {
       return (
         <Produto key={cadaProduto.id}>
-          <ImagemProduto src={cadaProduto.imageUrl} alt={cadaProduto.name} onClick={() => this.onProdutoSelecionado(cadaProduto)} />
+          <ImagemProduto src={cadaProduto.imageUrl} alt={cadaProduto.name} onClick={() => this.onProdutoSelecionado(cadaProduto)}/>
           <DivNomeValor>
             <TituloProdutoPequeno>{cadaProduto.name}</TituloProdutoPequeno>
             <Paragrafo>R${parseFloat(cadaProduto.value).toFixed(2)}</Paragrafo>
@@ -247,13 +256,13 @@ class Home extends React.Component {
         </DivSuperior>
         <DivInferior>
 
-          <GridDeProdutos>
-            {listaDeItens}
-          </GridDeProdutos>
-
           <div>
             {this.renderizaProdutoSelecionado(this.state.produtoSelecionado)}
           </div>
+
+          <GridDeProdutos>
+            {listaDeItens}
+          </GridDeProdutos>
 
         </DivInferior>
       </HomeContainer>

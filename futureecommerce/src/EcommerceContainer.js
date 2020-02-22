@@ -20,12 +20,18 @@ const Container = styled.div`
 
 const Button = styled.button`
   position: fixed;
-  bottom: 0 ;
+  top: 0 ;
   right: 0;
-  margin: 2vh 2vw;
+  margin: 1vh 1vw;
   border-radius: 50%;
   padding: 0 1vw;
   outline: 0;
+
+  @media screen and (max-device-width: 1200px) {
+    margin: 0;
+    padding: 0 2vh;
+    position: fixed;
+  }
 `
 
 class EcommerceContainer extends React.Component {
@@ -41,7 +47,7 @@ class EcommerceContainer extends React.Component {
     }
   }
 
-  
+
 
   apareceDesapareceCarrinho = () => {
     const novoEstadoCarrinho = this.state.estadoDoCarrinho
@@ -93,15 +99,15 @@ class EcommerceContainer extends React.Component {
 
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const noEstadodoCarrinho = localStorage.getItem('carrinho')
     const novoEstado = JSON.parse(noEstadodoCarrinho)
-    if (novoEstado){
-      this.setState({carrinho:novoEstado})
+    if (novoEstado) {
+      this.setState({ carrinho: novoEstado })
     }
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     const estadoComoString = JSON.stringify(this.state.carrinho)
     localStorage.setItem('carrinho', estadoComoString)
   }
@@ -125,17 +131,20 @@ class EcommerceContainer extends React.Component {
       <Container>
         <Filtro aoMudarFiltro={this.atualizaFiltro} />
 
-        <Home
-          filtroMinimo={this.state.filtroMinimo}
-          filtroMaximo={this.state.filtroMaximo}
-          filtroNome={this.state.filtroNome}
-          aoClicarAdiciona={this.atualizaCarrinho}
-        />
+        <div>
+          {this.state.estadoDoCarrinho && <Carrinho
+            itensCarrinho={this.state.carrinho}
+            removeProdutoDoCarrinho={this.removeProdutoDoCarrinho}
+          />}
 
-        {this.state.estadoDoCarrinho && <Carrinho
-          itensCarrinho={this.state.carrinho}
-          removeProdutoDoCarrinho={this.removeProdutoDoCarrinho}
-        />}
+          <Home
+            filtroMinimo={this.state.filtroMinimo}
+            filtroMaximo={this.state.filtroMaximo}
+            filtroNome={this.state.filtroNome}
+            aoClicarAdiciona={this.atualizaCarrinho}
+          />
+
+        </div>
 
         <Button onClick={this.apareceDesapareceCarrinho}>
           <h1 className="material-icons">shopping_cart</h1>

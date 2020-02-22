@@ -7,6 +7,7 @@ const FiltroContainer = styled.div`
   flex-direction: column;
   padding: 1vh 1vw;
   width: 20vw;
+  margin-top: 1vh;
 
   @media screen and (max-device-width: 1200px) {
     width: 100vw;
@@ -17,6 +18,7 @@ const DivInputs = styled.div`
   @media screen and (max-device-width: 1200px) {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
   }
 `
 
@@ -25,6 +27,7 @@ const TituloFiltro = styled.h2`
     
   @media screen and (max-device-width: 1200px) {
     margin: 0;
+    padding-bottom: 2vh
   }
 
 `
@@ -32,7 +35,7 @@ const InputFiltro = styled.input`
   margin-bottom: 1vh;
 
   @media screen and (max-device-width: 1200px) {
-    width: 25vw;
+    width: 28vw;
   }
 `
 class Filtro extends React.Component {

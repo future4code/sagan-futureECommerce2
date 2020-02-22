@@ -29,6 +29,20 @@ const SpanExcluir = styled.span`
     color: red;
 `
 
+const DivBotaoDesconto = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+const BotaoDesconto = styled.button`
+  width: 15%;
+  margin: 1vh 0;
+
+  @media screen and (max-device-width: 1200px) {
+    width: 30%;
+  }
+`
+
 class Carrinho extends React.Component {
   constructor(props) {
     super(props)
@@ -88,9 +102,15 @@ class Carrinho extends React.Component {
     return (
       <CarrinhoContainer>
         <Titulo>Carrinho:</Titulo>
+
         {listaDeProdutosNoCarrinho}
+
         <p>Total: <strong>R$ {valorTotal.toFixed(2)}</strong></p>
-        <button onClick={this.gerarDesconto}>{mudaTextoBotao}</button>
+        
+        <DivBotaoDesconto>
+          <BotaoDesconto onClick={this.gerarDesconto}>{mudaTextoBotao}</BotaoDesconto>
+        </DivBotaoDesconto>
+
       </CarrinhoContainer>
     )
   }

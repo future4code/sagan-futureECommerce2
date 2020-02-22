@@ -126,11 +126,17 @@ class Home extends React.Component {
     })
   }
 
+  onProdutoRenderizadoSelecionado = () => {
+    this.setState({
+      produtoSelecionado: null
+    })
+  }
+
   renderizaProdutoSelecionado(produtoSelecionado) {
     if (produtoSelecionado != null) {
       return (
         <ProdutoRenderizado>
-          <ImagemProduto src={produtoSelecionado.imageUrl} alt={produtoSelecionado.name} />
+          <ImagemProduto src={produtoSelecionado.imageUrl} alt={produtoSelecionado.name} onClick={() => this.onProdutoRenderizadoSelecionado(produtoSelecionado)}/>
           <div>
             <TituloProdutoRenderizado>{produtoSelecionado.name}</TituloProdutoRenderizado>
             <Paragrafo>R${parseFloat(produtoSelecionado.value).toFixed(2)}</Paragrafo>

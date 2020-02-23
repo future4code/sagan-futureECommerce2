@@ -7,7 +7,7 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 ## Projeto: futureECommerce2
 
-[Site do projeto](http://futureecommerce2.surge.sh/)
+[Site do projeto](http://futureecommerce.surge.sh/)
 
 ![ecommerce](https://user-images.githubusercontent.com/45580434/75068382-d6faa200-54cd-11ea-99de-26f5c8dc7c61.gif)
 
